@@ -1,0 +1,29 @@
+/*
+  I2C Scanner - finds the address of your LCD module
+  Wiring: LCD SDA->A4, SCL->A5, VCC->5V, GND->GND
+  Open Serial Monitor at 9600 baud.
+*/
+
+#include <Wire.h>
+
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);
+  Serial.println("Scanning I2C bus...");
+}
+
+void loop() {
+  byte count = 0;
+  for (byte addr = 1; addr < 127; addr++) {
+    Wire.beginTransmission(addr);
+    if (Wire.endTransmission() == 0) {
+      Serial.print("Device found at address 0x");
+      if (addr < 16) Serial.print("0");
+      Serial.println(addr, HEX);
+      count++;
+    }
+  }
+  if (count == 0) Serial.println("No I2C devices found - check wiring");
+  Serial.println("---");
+  delay(3000);
+}

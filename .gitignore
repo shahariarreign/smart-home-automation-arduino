@@ -1,0 +1,14 @@
+# Local, private configuration (holds your real RFID card UID)
+firmware/smart_home_system/config.h
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Arduino build output
+build/
+*.hex
+*.elf
+*.bin
